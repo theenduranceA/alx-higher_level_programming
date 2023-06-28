@@ -17,8 +17,22 @@ class Square:
         """Public instance method, returns the current area of the Square."""
         return self.__size ** 2
 
+    @property
+    def size(self):
+        """To retrieve the size of the Square."""
+        return self.__size
+
+    @size.setter
+    def size(self, size):
+        """To set the size of the Square."""
+        if type(size) is not int:
+            raise TypeError("size must be an integer")
+        if size < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = size
+
     def my_print(self):
-        """Prints the square."""
+        """Prints the Square."""
 
         size = self.__size
         position = self.__position
@@ -33,20 +47,6 @@ class Square:
             for y in range(size):
                 print("#", end="")
             print()
-
-    @property
-    def size(self):
-        """To retrieve the size of the Square."""
-        return self.__size
-
-    @size.setter
-    def size(self, size):
-        """To set the size of the Square."""
-        if type(size) is not int:
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = size
 
     @property
     def position(self):
