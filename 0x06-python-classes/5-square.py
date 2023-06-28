@@ -21,14 +21,14 @@ class Square():
         return self.__size
 
     @size.setter
-    def size(self, Val):
+    def size(self, SizeVal):
         """To set the size of the Square."""
 
-        if type(Val) is not int:
+        if type(SizeVal) is not int:
             raise TypeError("size must be an integer")
-        if Val < 0:
+        if SizeVal < 0:
             raise ValueError("size must be >= 0")
-        self.__size = Val
+        self.__size = SizeVal
 
     def my_print(self):
         """Prints the Square."""
