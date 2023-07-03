@@ -14,6 +14,7 @@ class Rectangle:
         """Private instance attribute."""
         self.height = height
         "Private instance attribute."""
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
