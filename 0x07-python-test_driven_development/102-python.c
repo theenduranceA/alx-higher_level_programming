@@ -2,6 +2,11 @@
 #include <string.h>
 #include <Python.h>
 
+/**
+ * print_python_string - A Finction that prints Python strings.
+ * @p: A pointer to the string.
+ */
+
 void print_python_string(PyObject *p)
 {
 	printf("[.] string object info\n");
