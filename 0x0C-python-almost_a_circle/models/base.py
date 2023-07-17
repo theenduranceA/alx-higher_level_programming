@@ -80,8 +80,11 @@ class Base:
         with open(filename, mode='w', newline='') as f:
             writer = csv.writer(f)
             for obj in list_objs:
-                row = obj.to_csv_row()
-                writer.writerow(row)
+                if isinstance(obj, Rectangle):
+                    writer.writerow([obj.id, obj.width, obj.height, obj.x,
+                                    obj.y])
+                elif isinstance(obj, Square):
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
 
     @classmethod
     def load_from_file_csv(cls):
@@ -94,7 +97,20 @@ class Base:
             with open(filename, newline='') as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    instance = cls.create_from_csv_row(row)
+                    if cls.__name__ == 'Rectangle':
+                        instance = cls.create(
+                                id=int(row[0]),
+                                width=int(row[1]),
+                                height=int(row[2]),
+                                x=int(row[3]),
+                                y=int(row[4]))
+                    elif cls.__name__ == 'Square':
+                        instance = cls.create(
+                                id=int(row[0]),
+                                size=int(row[1]),
+                                x=int(row[2]),
+                                y=int(row[3]))
+
                     my_list.append(instance)
 
         return my_list
