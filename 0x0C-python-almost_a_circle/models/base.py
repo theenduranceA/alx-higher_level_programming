@@ -76,15 +76,17 @@ class Base:
         """Class method that serializes and saves the objects
         in CSV format to a file"""
         filename = cls.__name__ + ".csv"
-
-        with open(filename, mode='w', newline='') as f:
-            writer = csv.writer(f)
-            for obj in list_objs:
-                if isinstance(obj, Rectangle):
-                    writer.writerow([obj.id, obj.width, obj.height, obj.x,
-                                    obj.y])
-                elif isinstance(obj, Square):
-                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+        with open(filename, "w", newline="") as csvfile:
+            if list_objs is None or list_objs == []:
+                csvfile.write("[]")
+            else:
+                if cls.__name__ == "Rectangle":
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                for obj in list_objs:
+                    writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
