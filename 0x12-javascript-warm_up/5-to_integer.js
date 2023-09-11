@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-/*Script that prints My number: <first argument converted in integer>*/
+/* Script that prints My number: <first argument converted in integer */
 
 const arg = process.argv[2];
 if (isNaN(Number(arg))) {
