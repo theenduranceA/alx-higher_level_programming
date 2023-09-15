@@ -13,10 +13,8 @@ if __name__ == "__main__":
         argv[3]),
         pool_pre_ping=True)
 
-    engine = create_engine(db_uri)
     Session = sessionmaker(bind=engine)
-
     session = Session()
 
-    for data in session.query(State).order_by(State.id):
-        print("{0}: {1}".format(data.id, data.name))
+    for data in session.query(State).order_by(State.id).all():
+        print("{}: {}".format(data.id, data.name))
