@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 class City(Base):
-    """Class instance."""
+    """City class."""
 
     __tablename__ = "cities"
 
