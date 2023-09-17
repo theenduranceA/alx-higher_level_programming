@@ -9,16 +9,18 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
-        argv[1],
-        argv[2],
-        argv[3]),
+    engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+        sys.argv[1],
+        sys.argv[2],
+        sys.argv[3]),
         pool_pre_ping=True)
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).order_by(State.id):
+    states = session.query(State).order_by(State.id)
+    for state in states:
         print("{}: {}".format(state.id, state.name))
-        for city in state.cities:
-            print("    {}: {}".format(city.id, city.name))
+        for cities in state.cities:
+            print("    {}: {}".format(cities.id, cities.name))
+    session.close()
